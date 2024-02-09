@@ -58,7 +58,7 @@ async function filtreCategory() {
         const filtreParCategory = appart.filter((category) => {
           return category.categoryId == btnId;
         });
-        filtreParCategory.forEach(category => {
+        filtreParCategory.forEach((category) => {
           affichageTravaux(category);
         });
       }
@@ -68,8 +68,47 @@ async function filtreCategory() {
 }
 filtreCategory();
 
-// la page de connexion//
+//modale  sur modifier///
+const modifier = document.querySelector(".portfolio-projet-modifier p");
+const containerModal = document.querySelector(".containerModal");
+const xmark = document.querySelector(".containerModal .fa-xmark");
+const galleriesModal = document.querySelector(".galleriesModal");
 
+modifier.addEventListener("click", (e) => {
+  containerModal.style.display = "inline";
+});
+xmark.addEventListener("click", (e) => {
+  containerModal.style.display = "none";
+});
+containerModal.addEventListener("click", (e) => {
+  if (e.target.className == "containerModal") {
+    containerModal.style.display = "none";
+  }
+});
+
+//afficharge image de la galerie
+async function displayGallerie() {
+  galleriesModal.innerHTML = "";
+  const galerieTableaux = await getworks();
+  galerieTableaux.forEach((element) => {
+
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+    const span = document.createElement("span");
+    figure.classList.add("galleriesModal")
+    img.src = element.imageUrl;
+    const poubelle = document.createElement("i");
+    poubelle.classList.add("fa-solid", "fa-trash-can");
+    poubelle.id = element.id
+    span.appendChild(poubelle);
+    figure.appendChild(span);
+    figure.appendChild(img);
+    galleriesModal.appendChild (figure);
+
+  });
+  // console.log(galerieTableaux);
+}
+displayGallerie();
 
 ////4444
 
