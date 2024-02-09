@@ -296,11 +296,17 @@ li:hover {
   margin-top: 50px;
   font-weight: bold;
 }
-
-.modalGallerie button {
-
-  margin-top: 570px;
+.modalGallerie::before{
+  content: " ";
+  position: absolute;
+  width: 90%;
+top: 627px;px;
+  border-bottom: 1px rgba(136, 128, 128, 0.671) solid;
   
+
+}
+.modalGallerie button {
+  margin-top: 570px;
 }
 .modalGallerie i{
   margin-left: 90%;
