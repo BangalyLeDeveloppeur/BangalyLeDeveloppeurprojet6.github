@@ -296,17 +296,19 @@ li:hover {
   margin-top: 50px;
   font-weight: bold;
 }
+/*
+.modalGallerie button {
+
+  margin-top: 570px;
+  
+}*/
 .modalGallerie i{
   margin-left: 90%;
   cursor: pointer;
   margin-top: 19px;
 }
 
-.modalGallerie button {
 
-  margin-top: 570px;
-  
-}
 
 /*style pour le boutton */
 button {
