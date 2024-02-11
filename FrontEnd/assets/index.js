@@ -109,32 +109,32 @@ async function displayGallerieModale() {
     figure.appendChild(img);
     galleriesModal.appendChild(figure);
   });
-  //imageSuprimer();
-  // console.log(galerieTableaux);
+  imageSuprimer();
+  console.log(galerieTableaux);
 }
-//displayGallerieModale();
-///// supprission de l'image
-//function imageSuprimer() {
- // const supprimImage = document.querySelectorAll(".fa-trash-can");
-  //supprimImage.forEach((trash) => {
-    ///trash.addEventListener("click", (e) => {
-     // const reId = trash.id;
+displayGallerieModale();
+//supprission de l'image
+function imageSuprimer() {
+  const supprimImage = document.querySelectorAll(".fa-trash-can");
+  supprimImage.forEach((trash) => {
+    trash.addEventListener("click", (e) => {
+      const reId = trash.id;
       //console.log(reId)
-      //const delet = {
-       /// method: "DELETE",
-        //Headers: {"Content-Type": "application/json"},
-      //}
-   //fetch("http://localhost:5678/api/works/" +reId,delet).then((Response) => {
-    //if(!Response) {
-      //console.log("la suppression n'a pas marchée");
-    ///}
-       // return Response.json();
-      //})
-      //.then((data) =>{
-       // console.log("la suppression a marchée voici votre data:",data);
-        ////displayGallerieModale();
-        //init();
-     // })
-    //});
-  //});
-//}
+      const delet = {
+        method: "DELETE",
+        Headers: {"Content-Type": "application/json"},
+      }
+   fetch("http://localhost:5678/api/works/" +reId,delet).then((Response) => {
+    if(!Response) {
+      console.log("la suppression n'a pas marchée");
+    }
+        return Response.json();
+      })
+      .then((data) =>{
+       console.log("la suppression a marchée voici votre data:",data);
+        displayGallerieModale();
+        init();
+     })
+    });
+  });
+}
