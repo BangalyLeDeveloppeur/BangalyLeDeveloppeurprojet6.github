@@ -1,19 +1,24 @@
-//// recuperation dans api ///
+//// ciblage des balise sur Dom ///
 const gallery = document.querySelector("main");
 const filter = document.querySelector(".filter");
 const gallerySection = document.querySelector(".gallery");
 
+async function init() {
+  const listeWorks = await getworks();
+  affichageTravaux(listeWorks);
+}
 async function getworks() {
   const Response = await fetch(`http://localhost:5678/api/works/`);
   return await Response.json();
 }
-getworks();
+init();
 
 //afficharge des travaux ///
-async function affichageTravaux(element) {
+async function affichageTravaux(works) {
   const arrayWorks = await getworks();
-  arrayWorks.forEach((works) => {
-    //la boucle forEch a chaque passage dans la base de donées
+  gallerySection.innerHTML = "";
+  //la boucle forEch a chaque passage dans la base de donées
+  works.forEach((works) => {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const figcaption = document.createElement("figcaption");
@@ -48,27 +53,26 @@ categoriesButtons();
 ///affichage de filtre des contenus par categorie//
 async function filtreCategory() {
   const appart = await getworks();
-  console.log(appart);
+  //console.log(appart);
   const buttons = document.querySelectorAll(".filter button");
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      gallerySection.innerHTML = "";
-      btnId = e.target.id;
+      const btnId = e.target.getAttribute("id");
       if (btnId != "0") {
         const filtreParCategory = appart.filter((category) => {
           return category.categoryId == btnId;
         });
-        filtreParCategory.forEach((category) => {
-          affichageTravaux(category);
-        });
+        affichageTravaux(filtreParCategory);
+      } else {
+        init();
       }
-      console.log(btnId);
     });
   });
 }
 filtreCategory();
 
-//modale  sur modifier///
+//modale  sur modifier//////////////////////////////////////////////////
+//// ciblage des balise sur Dom ///
 const modifier = document.querySelector(".portfolio-projet-modifier p");
 const containerModal = document.querySelector(".containerModal");
 const xmark = document.querySelector(".containerModal .fa-xmark");
@@ -86,8 +90,8 @@ containerModal.addEventListener("click", (e) => {
   }
 });
 
-//afficharge image de la galerie
-async function displayGallerie() {
+//afficharge image de la galerie modalev/////
+async function displayGallerieModale() {
   galleriesModal.innerHTML = "";
   const galerieTableaux = await getworks();
   galerieTableaux.forEach((element) => {
@@ -95,73 +99,42 @@ async function displayGallerie() {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const span = document.createElement("span");
-    figure.classList.add("galleriesModal")
+    figure.classList.add("galleriesModal");
     img.src = element.imageUrl;
     const poubelle = document.createElement("i");
     poubelle.classList.add("fa-solid", "fa-trash-can");
-    poubelle.id = element.id
+    poubelle.id = element.id;
     span.appendChild(poubelle);
     figure.appendChild(span);
     figure.appendChild(img);
-    galleriesModal.appendChild (figure);
-
+    galleriesModal.appendChild(figure);
   });
+  //imageSuprimer();
   // console.log(galerieTableaux);
 }
-displayGallerie();
-
-////4444
-
-//const gallerySection = document.querySelector(".gallery");
-//const categorySection = document.querySelector(".category");
-
-//const getWork = async (category) => {
-//const response = await fetch("http://localhost:5678/api/works");
-//const data = await response.json();
-//console.log(category);
-//if (!category || category === 0) {
-// return data;
-//} else {
-//return data.filter((element) => element.categoryId === category);
+//displayGallerieModale();
+///// supprission de l'image
+//function imageSuprimer() {
+ // const supprimImage = document.querySelectorAll(".fa-trash-can");
+  //supprimImage.forEach((trash) => {
+    ///trash.addEventListener("click", (e) => {
+     // const reId = trash.id;
+      //console.log(reId)
+      //const delet = {
+       /// method: "DELETE",
+        //Headers: {"Content-Type": "application/json"},
+      //}
+   //fetch("http://localhost:5678/api/works/" +reId,delet).then((Response) => {
+    //if(!Response) {
+      //console.log("la suppression n'a pas marchée");
+    ///}
+       // return Response.json();
+      //})
+      //.then((data) =>{
+       // console.log("la suppression a marchée voici votre data:",data);
+        ////displayGallerieModale();
+        //init();
+     // })
+    //});
+  //});
 //}
-//};
-
-//const getCategory = async () => {
-//const response = await fetch("http://localhost:5678/api/categories");
-///const data = await response.json();
-//return data;
-//};
-
-//const afficherlesTravaux = async (works) => {
-// gallerySection.innerHTML = "";
-//works.forEach((element) => {
-// const workDOM = `
-//<figure>
-//  <img src="${element.imageUrl}" alt="${element.title}" width="150"/>
-//   <figcaption>${element.title} ${element.categoryId}<figcaption>
-// <figure>
-// `;
-// // gallerySection.innerHTML += workDOM;
-//});
-//};
-
-//const filterWork = async (category) => {
-// const works = await getWork(category);
-// afficherlesTravaux(works);
-//};
-
-//categorySection.addEventListener("click", (event) => {
-//const element = event.target;
-//const button = element.tagName.toLowerCase();
-//(button === "button") {
-//const idCategory = element.getAttribute("id");
-//filterWork(Number.parseInt(idCategory));
-//}
-
-//});
-
-//const init = async () => {
-//const works = await getWork();
-//afficherlesTravaux(works);
-//};
-//init();

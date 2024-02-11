@@ -283,8 +283,8 @@ li:hover {
   display: none;
   position: absolute;
   height: 766px;
-  width: 65%;
-  margin-left: 18%;
+  margin-left: 5%;
+  width: 50%;
   background: white;
   border-radius: 15px;
   text-align: center;
@@ -296,6 +296,8 @@ li:hover {
   letter-spacing: 0.1em;
   margin-top: 50px;
   font-weight: bold;
+  margin-bottom: 28px;
+ 
 }
 .modalGallerie::before {
   content: " ";
@@ -310,7 +312,7 @@ li:hover {
 .modalGallerie i {
   margin-left: 90%;
   cursor: pointer;
-  margin-top: 19px;
+  margin-top: 20px
 }
 
 /*style pour le boutton */
@@ -335,7 +337,7 @@ button {
 .gallery {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr ;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 }
@@ -343,17 +345,18 @@ button {
 .galleriesModal {
   width: 10%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 7px;
   grid-row-gap: 20px;
  
+ 
 }
-
 .galleriesModal img {
   height: 131px;
   width: 150px;
   object-fit: cover;
 }
+
 .galleriesModal figure {
   position: relative;
 
