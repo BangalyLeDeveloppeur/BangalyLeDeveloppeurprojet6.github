@@ -140,4 +140,24 @@ function imageSuprimer() {
   });
 }
 
-
+//le code sur la partie ajout de photo////////////////////////////
+const AjoutUnePhoto = document.querySelector(".modalGallerie button");
+const AjoutPhoto = document.querySelector(".ajouterphoto");
+let profilePic = document.getElementById("profile-pic");
+let inputFile = document.getElementById("input-file");
+const xmarkk = document.querySelector(".ajouterphotoflèche .fa-xmark");
+const arrowLeft = document.querySelector(".ajouterphotoflèche .fa-arrow-left");
+//console.log(arrowLeft);
+//console.log(AjoutUnePhoto);
+arrowLeft.addEventListener("click", (e) => {
+  AjoutPhoto.style.display = "none";
+});
+AjoutUnePhoto.addEventListener("click", (e) => {
+  AjoutPhoto.style.display = "inline";
+});
+xmarkk.addEventListener("click", (e) => {
+  AjoutPhoto.style.display = "none";
+});
+inputFile.onchange = function () {
+  profilePic.src = URL.createObjectURL(inputFile.files[0]);
+};
