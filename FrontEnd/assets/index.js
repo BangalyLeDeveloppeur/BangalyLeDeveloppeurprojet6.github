@@ -95,7 +95,6 @@ async function displayGallerieModale() {
   galleriesModal.innerHTML = "";
   const galerieTableaux = await getworks();
   galerieTableaux.forEach((element) => {
-
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const span = document.createElement("span");
@@ -110,31 +109,35 @@ async function displayGallerieModale() {
     galleriesModal.appendChild(figure);
   });
   imageSuprimer();
-  console.log(galerieTableaux);
+  //console.log(galerieTableaux);
 }
 displayGallerieModale();
-//supprission de l'image
+//supprission de l'image sur le site/////////////
 function imageSuprimer() {
   const supprimImage = document.querySelectorAll(".fa-trash-can");
   supprimImage.forEach((trash) => {
     trash.addEventListener("click", (e) => {
-      const reId = trash.id;
+      const reId = trash.getAttribute("id");
       //console.log(reId)
-      const delet = {
+
+      const delImg = {
         method: "DELETE",
-        Headers: {"Content-Type": "application/json"},
-      }
-   fetch("http://localhost:5678/api/works/" +reId,delet).then((Response) => {
-    if(!Response) {
-      console.log("la suppression n'a pas marchée");
-    }
-        return Response.json();
-      })
-      .then((data) =>{
-       console.log("la suppression a marchée voici votre data:",data);
-        displayGallerieModale();
-        init();
-     })
+        Headers: { "Content-Type": "application/json" },
+      };
+      fetch("http://localhost:5678/api/works/" + reId, delImg)
+        .then((Response) => {
+          if (!Response) {
+            console.log("la suppression n'a pas marchée");
+          }
+          return Response.json();
+        })
+        .then((data) => {
+          console.log("la suppression a marchée voici votre data:", data);
+          displayGallerieModale();
+          init();
+        });
     });
   });
 }
+
+

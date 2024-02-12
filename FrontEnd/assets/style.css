@@ -314,7 +314,101 @@ li:hover {
   cursor: pointer;
   margin-top: 20px
 }
+/* styles pour la modale ajou photo */
+.ajouterphoto {
+  position: absolute;
+  height: 766px;
+  margin-left: 5%;
+  width: 50%;
+  background: white;
+  border-radius: 15px;
+  text-align: center;
+  top: 520px;
+  display: none;
+}
 
+.ajouterphotoflèche{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+.ajouterphotoflèche i{
+  cursor: pointer;
+}
+.cadreajoutPhoto{
+  display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+  height: 170px;
+  width: 430px;
+  background: rgb(232, 241, 246);
+  margin: auto;
+  
+}
+.cadreajoutPhoto::before {
+  content: " ";
+  position: absolute;
+  width: 90%;
+  top: 600px;
+  border-bottom: 1px rgba(136, 128, 128, 0.671) solid;
+}
+.cadreajoutPhoto img{
+  height: 90px;
+  width: 150px;
+}
+.cadreajoutPhoto label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  height: 40px;
+  width: 150px;
+  background: rgba(167, 170, 168, 0.473);
+  cursor: pointer;
+  margin-top: 10px;
+  
+}
+
+#input-file{
+  display: none;
+}
+.ajouterphoto form {
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 58px 0 58px  ;
+  
+}
+.ajouterphoto form label{
+  font-size: 1.2rem;
+    font-family: "Syne";
+    margin-bottom: 0.5em;
+  
+}
+.ajouterphoto form input{
+      height: 60px;
+      margin-bottom: 50px;
+      border: none;
+      box-shadow: 1px 3px 9px 2px rgba(64, 136, 74, 0.377);
+}
+
+.ajouterphoto form button{
+  cursor: pointer;
+  margin-left: 30px;
+  width: 50%;
+  background-color: #606463;
+  color: white;
+  font-size: 1rem;
+  font-family: "Syne";
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+
+}
 /*style pour le boutton */
 button {
   cursor: pointer;
