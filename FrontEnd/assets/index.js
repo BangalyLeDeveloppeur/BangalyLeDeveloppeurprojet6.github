@@ -36,6 +36,7 @@ async function getcategorie() {
   const Reponse = await fetch("http://localhost:5678/api/categories/");
   return await Reponse.json();
 }
+
 getcategorie();
 
 async function categoriesButtons() {
@@ -71,7 +72,7 @@ async function filtreCategory() {
 }
 filtreCategory();
 
-//modale  sur modifier//////////////////////////////////////////////////
+//le code sur la partie modale  sur modifier//////////////////////////////////////////////////
 //// ciblage des balise sur Dom ///
 const modifier = document.querySelector(".portfolio-projet-modifier p");
 const containerModal = document.querySelector(".containerModal");
@@ -112,21 +113,21 @@ async function displayGallerieModale() {
   //console.log(galerieTableaux);
 }
 displayGallerieModale();
+
 //supprission de l'image sur le site/////////////
 function imageSuprimer() {
   const supprimImage = document.querySelectorAll(".fa-trash-can");
   supprimImage.forEach((trash) => {
     trash.addEventListener("click", (e) => {
-      const reId = trash.getAttribute("id");
+      const reId = trash.id;
       //console.log(reId)
-
       const delImg = {
         method: "DELETE",
         Headers: { "Content-Type": "application/json" },
       };
       fetch("http://localhost:5678/api/works/" + reId, delImg)
         .then((Response) => {
-          if (!Response) {
+          if (!Response.ok) {
             console.log("la suppression n'a pas marchée");
           }
           return Response.json();
@@ -147,6 +148,10 @@ let profilePic = document.getElementById("profile-pic");
 let inputFile = document.getElementById("input-file");
 const xmarkk = document.querySelector(".ajouterphotoflèche .fa-xmark");
 const arrowLeft = document.querySelector(".ajouterphotoflèche .fa-arrow-left");
+const button = document.querySelector("form button");
+const selectGategorie = document.querySelector("form .select");
+console.log(selectGategorie);
+
 //console.log(arrowLeft);
 //console.log(AjoutUnePhoto);
 arrowLeft.addEventListener("click", (e) => {
@@ -158,6 +163,12 @@ AjoutUnePhoto.addEventListener("click", (e) => {
 xmarkk.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
 });
+selectGategorie.addEventListener("click", (e) => {
+ 
+  console.log("Bonjour je suis une categorie");
+});
+
+
 inputFile.onchange = function () {
   profilePic.src = URL.createObjectURL(inputFile.files[0]);
 };
