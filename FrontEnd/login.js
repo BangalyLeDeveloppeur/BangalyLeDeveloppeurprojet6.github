@@ -5,43 +5,45 @@ const form = document.querySelector("form");
 const messageErreur = document.querySelector(".logg p");
 console.log(messageErreur);
 
-// la partie post//
+// la methode post dans Api//
 const PostUser = (userinfo) => ({
   method: "POST",
   headers: {
-    "Content-Type":"application/json",
+    "Content-Type": "application/json",
   },
   body: JSON.stringify(userinfo),
 });
 
 async function userPost(user) {
-  fetch("http://localhost:5678/api/users/login/", PostUser(user)).then((data) =>
-    console.log("data envoyée")
+  const response = await fetch(
+    "http://localhost:5678/api/users/login/",
+    PostUser(user)
   );
+  //console.log(response.ok);
+  if (response.ok) {
+    return response.json();
+  }
 }
 
 //function de conexion ///
 async function login() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const UserEmail = email.value;
-    const UserPword = password.value;
-    const users = await userPost({ email: UserEmail, password: UserPword });
-    console.log(UserEmail, UserPword);
-    users.forEach((e) => {
-      // la verification des conditions //
-      if (UserEmail == email.value && UserPword == password.value) {
-        // si toutes ces conditions son rempliees
-        window.sessionStorage.loged = true;
-        window.location.href = "../index.html";
-      } else{
-        //// message erreur /////
-        email.classList.add("inputErrorLogin");
-        password.classList.add("inputErrorLogin");
-        messageErreur.textContent =
-          "Votre email ou votre mot de passe est incorrect !";
-      }
-    });
+    const userEmail = email.value;
+    const userPassword = password.value;
+    const users = await userPost({ email: userEmail, password: userPassword });
+    console.log(users);
+    if (users) {
+      window.sessionStorage.loged = true;
+      window.location.href = "index.html";
+    } else {
+      //// message erreur /////
+      email.classList.add("inputErrorLogin");
+      password.classList.add("inputErrorLogin");
+      messageErreur.textContent =
+        "Votre email ou votre mot de passe est incorrect !";
+    }
   });
 }
+
 login();

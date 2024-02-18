@@ -270,7 +270,23 @@ li:hover {
     font-family: "Syne";
     margin-bottom: 0.5em;
   }
-  
+  button {
+    cursor: pointer;
+    margin-left: 30px;
+    background-color: #1d6154;
+    color: white;
+    font-size: 1rem;
+    font-family: "Syne";
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    &:hover {
+      color: #1d6154;
+      background-color: antiquewhite;
+      border: 1px solid #1d6154;
+    }
+  }
 }
 
 
@@ -329,7 +345,7 @@ li:hover {
   top: 520px;
   display: none;
    select {
-    height: 60px;
+    height: 0px;
     margin-bottom: 50px;
     border: none;
     box-shadow: 1px 3px 9px 2px rgba(64, 136, 74, 0.377);
