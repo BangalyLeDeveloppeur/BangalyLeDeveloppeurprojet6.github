@@ -117,15 +117,18 @@ displayGallerieModale();
 //supprission de l'image sur le site/////////////
 function imageSuprimer() {
   const supprimImage = document.querySelectorAll(".fa-trash-can");
+
   supprimImage.forEach((trash) => {
+    const token = localStorage.getItem("authToken");
     trash.addEventListener("click", (e) => {
       const reId = trash.id;
       //console.log(reId)
-      const delImg = {
+      const headerRequest = {
         method: "DELETE",
-        Headers: { "Content-Type": "application/json" },
+        headers: { Authorization: `Bearer ${token}`,
+       },
       };
-      fetch("http://localhost:5678/api/works/" + reId, delImg)
+      fetch("http://localhost:5678/api/works/" + reId, headerRequest)
         .then((Response) => {
           if (!Response.ok) {
             console.log("la suppression n'a pas marchée");
@@ -164,7 +167,7 @@ xmarkk.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
 });
 selectGategorie.addEventListener("click", (e) => {
- 
+
   console.log("Bonjour je suis une categorie");
 });
 
