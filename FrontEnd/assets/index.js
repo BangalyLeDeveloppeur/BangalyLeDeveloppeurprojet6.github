@@ -125,8 +125,7 @@ function imageSuprimer() {
       //console.log(reId)
       const headerRequest = {
         method: "DELETE",
-        headers: { Authorization: `Bearer ${token}`,
-       },
+        headers: { Authorization: `Bearer ${token}` },
       };
       fetch("http://localhost:5678/api/works/" + reId, headerRequest)
         .then((Response) => {
@@ -153,6 +152,8 @@ const xmarkk = document.querySelector(".ajouterphotoflèche .fa-xmark");
 const arrowLeft = document.querySelector(".ajouterphotoflèche .fa-arrow-left");
 const button = document.querySelector("form button");
 const selectGategorie = document.querySelector("form .select");
+const sele = document.querySelector("form");
+
 console.log(selectGategorie);
 
 //console.log(arrowLeft);
@@ -166,12 +167,18 @@ AjoutUnePhoto.addEventListener("click", (e) => {
 xmarkk.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
 });
-selectGategorie.addEventListener("click", (e) => {
-
-  console.log("Bonjour je suis une categorie");
-});
-
 
 inputFile.onchange = function () {
   profilePic.src = URL.createObjectURL(inputFile.files[0]);
 };
+
+async function formSelectcategories() {
+  const affichageCategorieSelect = await getcategorie();
+  affichageCategorieSelect.forEach(category => {
+    const figOption = document.createElement("option");
+    figOption.textContent = category.name;
+    selectGategorie.appendChild(figOption);
+ });
+  
+}
+formSelectcategories();
