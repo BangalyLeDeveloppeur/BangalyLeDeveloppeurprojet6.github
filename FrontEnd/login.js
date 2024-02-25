@@ -34,6 +34,7 @@ async function login() {
     const users = await userPost({ email: userEmail, password: userPassword });
     console.log(users);
     if (users) {
+      window.localStorage.setItem("authToken", users.token);
       window.sessionStorage.loged = true;
       window.location.href = "index.html";
     } else {

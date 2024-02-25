@@ -10,12 +10,15 @@ async function init() {
 async function getworks() {
   const Response = await fetch(`http://localhost:5678/api/works/`);
   return await Response.json();
+ 
 }
+
 init();
 
 //afficharge des travaux ///
 async function affichageTravaux(works) {
   const arrayWorks = await getworks();
+ // console.log(arrayWorks)
   gallerySection.innerHTML = "";
   //la boucle forEch a chaque passage dans la base de donées
   works.forEach((works) => {
@@ -29,7 +32,8 @@ async function affichageTravaux(works) {
     gallerySection.appendChild(figure);
   });
 }
-affichageTravaux();
+
+console.log()
 
 /// recuperation du tableau categorie dans la base //
 async function getcategorie() {
@@ -152,14 +156,17 @@ const xmarkk = document.querySelector(".ajouterphotoflèche .fa-xmark");
 const arrowLeft = document.querySelector(".ajouterphotoflèche .fa-arrow-left");
 const button = document.querySelector("form button");
 const selectGategorie = document.querySelector("form .select");
-const sele = document.querySelector("form");
+const form = document.querySelector("form");
 
-console.log(selectGategorie);
+//console.log(selectGategorie);
 
 //console.log(arrowLeft);
 //console.log(AjoutUnePhoto);
 arrowLeft.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
+});
+button.addEventListener("click", (e) => {
+  button.style.background = "green";
 });
 AjoutUnePhoto.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "inline";
@@ -170,15 +177,22 @@ xmarkk.addEventListener("click", (e) => {
 
 inputFile.onchange = function () {
   profilePic.src = URL.createObjectURL(inputFile.files[0]);
+ 
 };
 
 async function formSelectcategories() {
   const affichageCategorieSelect = await getcategorie();
-  affichageCategorieSelect.forEach(category => {
+  affichageCategorieSelect.forEach((category) => {
     const figOption = document.createElement("option");
     figOption.textContent = category.name;
     selectGategorie.appendChild(figOption);
- });
-  
+
+    console.log()
+  });
 }
 formSelectcategories();
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  //console.log(form);
+});
