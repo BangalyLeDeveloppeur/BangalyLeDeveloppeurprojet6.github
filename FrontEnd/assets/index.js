@@ -10,7 +10,6 @@ async function init() {
 async function getworks() {
   const Response = await fetch(`http://localhost:5678/api/works/`);
   return await Response.json();
- 
 }
 
 init();
@@ -18,7 +17,7 @@ init();
 //afficharge des travaux ///
 async function affichageTravaux(works) {
   const arrayWorks = await getworks();
- // console.log(arrayWorks)
+  // console.log(arrayWorks)
   gallerySection.innerHTML = "";
   //la boucle forEch a chaque passage dans la base de donées
   works.forEach((works) => {
@@ -33,7 +32,7 @@ async function affichageTravaux(works) {
   });
 }
 
-console.log()
+console.log();
 
 /// recuperation du tableau categorie dans la base //
 async function getcategorie() {
@@ -156,7 +155,9 @@ const xmarkk = document.querySelector(".ajouterphotoflèche .fa-xmark");
 const arrowLeft = document.querySelector(".ajouterphotoflèche .fa-arrow-left");
 const button = document.querySelector("form button");
 const selectGategorie = document.querySelector("form .select");
+const title = document.querySelector("form .title-image");
 const form = document.querySelector("form");
+//console.log(title)
 
 //console.log(selectGategorie);
 
@@ -177,7 +178,6 @@ xmarkk.addEventListener("click", (e) => {
 
 inputFile.onchange = function () {
   profilePic.src = URL.createObjectURL(inputFile.files[0]);
- 
 };
 
 async function formSelectcategories() {
@@ -186,13 +186,30 @@ async function formSelectcategories() {
     const figOption = document.createElement("option");
     figOption.textContent = category.name;
     selectGategorie.appendChild(figOption);
-
-    console.log()
   });
 }
 formSelectcategories();
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  //console.log(form);
-});
+// la mise en jours du works//
+const addWorks = () => {
+  const token = localStorage.getItem("authToken");
+  const formData = new FormData();
+  formData.append("image", inputFile.files[0]);
+  formData.append("title", "titreImg");
+  formData.append("category", "titreCategorie");
+  const responseWorks = fetch("http://localhost:5678/api/works/", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+  console.log(responseWorks);
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const titreImg = title.value;
+    const titreCategorie = selectGategorie.value;
+    console.log(titreImg, titreCategorie);
+  });
+};
+addWorks();
