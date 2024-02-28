@@ -153,10 +153,14 @@ let profilePic = document.getElementById("profile-pic");
 let inputFile = document.getElementById("input-file");
 const xmarkk = document.querySelector(".ajouterphotoflèche .fa-xmark");
 const arrowLeft = document.querySelector(".ajouterphotoflèche .fa-arrow-left");
+
 const button = document.querySelector("form button");
 const selectGategorie = document.querySelector("form .select");
 const title = document.querySelector("form .title-image");
 const form = document.querySelector("form");
+
+console.log(selectGategorie);
+
 //console.log(title)
 
 //console.log(selectGategorie);
@@ -179,37 +183,66 @@ xmarkk.addEventListener("click", (e) => {
 inputFile.onchange = function () {
   profilePic.src = URL.createObjectURL(inputFile.files[0]);
 };
-
+/// céaction de categorie dans le formulaire submit//
 async function formSelectcategories() {
   const affichageCategorieSelect = await getcategorie();
   affichageCategorieSelect.forEach((category) => {
     const figOption = document.createElement("option");
     figOption.textContent = category.name;
+    //figOption.value = category.id;
     selectGategorie.appendChild(figOption);
   });
 }
 formSelectcategories();
 
-// la mise en jours du works//
-const addWorks = () => {
+//ajoutre l'image dans le works, prémière methode ///
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
   const token = localStorage.getItem("authToken");
-  const formData = new FormData();
-  formData.append("image", inputFile.files[0]);
-  formData.append("title", "titreImg");
-  formData.append("category", "titreCategorie");
-  const responseWorks = fetch("http://localhost:5678/api/works/", {
+  const formData = {
+    title: title.value,
+    selectGategorie: selectGategorie.value,
+    inputFile: inputFile.files[0],
+  };
+  fetch("http://localhost:5678/api/works",{
     method: "POST",
+    body: JSON.stringify(formData),
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer${token}`,
     },
-    body: formData,
-  });
-  console.log(responseWorks);
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const titreImg = title.value;
-    const titreCategorie = selectGategorie.value;
-    console.log(titreImg, titreCategorie);
-  });
-};
-addWorks();
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      displayGallerieModale();
+      init();
+    });
+});
+
+// la mise en jours du works 2iem methode//
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const addWorks = () => {
+    const token = localStorage.getItem("authToken");
+    const formData = new FormData();
+    formData.append("image", inputFile.files[0]);
+    formData.append("title", "title.value");
+    formData.append("category", "selectGategorie.value");
+    //console.log(formData);
+    fetch("http://localhost:5678/api/works/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer${token}`,
+      },
+      body: JSON.stringify(formData),
+    });
+    displayGallerieModale();
+    init();
+  };
+  addWorks();
+});
+
+//////////////////
