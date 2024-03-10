@@ -189,56 +189,40 @@ async function formSelectcategories() {
   affichageCategorieSelect.forEach((category) => {
     const figOption = document.createElement("option");
     figOption.textContent = category.name;
-    //figOption.value = category.id;
+    figOption.value = category.id;
     selectGategorie.appendChild(figOption);
   });
 }
 formSelectcategories();
 
 //ajoutre l'image dans le works, prémière methode ///
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const token = localStorage.getItem("authToken");
-  const formData = {
-    title: title.value,
-    selectGategorie: selectGategorie.value,
-    inputFile: inputFile.files[0],
-  };
-  fetch("http://localhost:5678/api/works",{
-    method: "POST",
-    body: JSON.stringify(formData),
-    headers: {
-      Authorization: `Bearer${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      displayGallerieModale();
-      init();
-    });
-});
+
+
+
 
 // la mise en jours du works 2iem methode//
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const addWorks = () => {
     const token = localStorage.getItem("authToken");
     const formData = new FormData();
     formData.append("image", inputFile.files[0]);
-    formData.append("title", "title.value");
-    formData.append("category", "selectGategorie.value");
-    //console.log(formData);
+    formData.append("title", title.value);
+    formData.append("category", selectGategorie.value);
+
+    console.log(formData);
     fetch("http://localhost:5678/api/works/", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer${token}`,
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(formData),
-    });
+      body:formData,
+      
+    }).catch (error => console.log(error)) 
+     
+   
+
     displayGallerieModale();
     init();
   };
