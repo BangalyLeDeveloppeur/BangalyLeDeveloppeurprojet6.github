@@ -102,7 +102,7 @@ async function displayGallerieModale() {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const span = document.createElement("span");
-    figure.classList.add("galleriesModal");
+    figure.classList.add("gallerieModal");
     img.src = element.imageUrl;
     const poubelle = document.createElement("i");
     poubelle.classList.add("fa-solid", "fa-trash-can");
