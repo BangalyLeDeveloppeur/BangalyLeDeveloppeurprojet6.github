@@ -124,6 +124,7 @@ function imageSuprimer() {
   supprimImage.forEach((trash) => {
     const token = localStorage.getItem("authToken");
     trash.addEventListener("click", (e) => {
+      e.preventDefault();
       const reId = trash.id;
       //console.log(reId)
       const headerRequest = {
@@ -171,7 +172,7 @@ arrowLeft.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
 });
 button.addEventListener("click", (e) => {
-  button.style.background = "green";
+  button.style.background = "#1d6154";
 });
 AjoutUnePhoto.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "inline";
@@ -196,12 +197,6 @@ async function formSelectcategories() {
 formSelectcategories();
 
 //ajoutre l'image dans le works, prémière methode ///
-
-
-
-
-// la mise en jours du works 2iem methode//
-
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const addWorks = () => {
@@ -217,11 +212,8 @@ form.addEventListener("submit", (e) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      body:formData,
-      
-    }).catch (error => console.log(error)) 
-     
-   
+      body: formData,
+    }).catch((error) => console.log(error));
 
     displayGallerieModale();
     init();
