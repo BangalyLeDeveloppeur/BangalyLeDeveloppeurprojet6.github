@@ -75,6 +75,7 @@ async function filtreCategory() {
 }
 filtreCategory();
 
+
 //le code sur la partie modale  sur modifier//////////////////////////////////////////////////
 //// ciblage des balise sur Dom ///
 const modifier = document.querySelector(".portfolio-projet-modifier p");
@@ -145,7 +146,9 @@ function imageSuprimer() {
         });
     });
   });
+  //return false;
 }
+
 
 //le code sur la partie ajout de photo////////////////////////////
 const AjoutUnePhoto = document.querySelector(".modalGallerie button");
