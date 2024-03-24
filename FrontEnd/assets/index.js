@@ -6,6 +6,10 @@ const gallerySection = document.querySelector(".gallery");
 async function init() {
   const listeWorks = await getworks();
   affichageTravaux(listeWorks);
+  resetormWork();
+  categoriesButtons();
+  filtreCategory();
+  displayGallerieModale();
 }
 async function getworks() {
   const Response = await fetch(`http://localhost:5678/api/works/`);
@@ -16,11 +20,12 @@ init();
 
 //afficharge des travaux ///
 async function affichageTravaux(works) {
+  let listeWork = works ? works : await getworks();
   const arrayWorks = await getworks();
   // console.log(arrayWorks)
   gallerySection.innerHTML = "";
   //la boucle forEch a chaque passage dans la base de donées
-  works.forEach((works) => {
+  listeWork.forEach((works) => {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const figcaption = document.createElement("figcaption");
@@ -32,15 +37,11 @@ async function affichageTravaux(works) {
   });
 }
 
-console.log();
-
 /// recuperation du tableau categorie dans la base //
 async function getcategorie() {
   const Reponse = await fetch("http://localhost:5678/api/categories/");
   return await Reponse.json();
 }
-
-getcategorie();
 
 async function categoriesButtons() {
   const categorys = await getcategorie();
@@ -52,7 +53,6 @@ async function categoriesButtons() {
     filter.appendChild(btn);
   });
 }
-categoriesButtons();
 
 ///affichage de filtre des contenus par categorie//
 async function filtreCategory() {
@@ -68,13 +68,11 @@ async function filtreCategory() {
         });
         affichageTravaux(filtreParCategory);
       } else {
-        init();
+        affichageTravaux(appart);
       }
     });
   });
 }
-filtreCategory();
-
 
 //le code sur la partie modale  sur modifier//////////////////////////////////////////////////
 //// ciblage des balise sur Dom ///
@@ -116,7 +114,6 @@ async function displayGallerieModale() {
   imageSuprimer();
   //console.log(galerieTableaux);
 }
-displayGallerieModale();
 
 //supprission de l'image sur le site/////////////
 function imageSuprimer() {
@@ -137,18 +134,16 @@ function imageSuprimer() {
           if (!Response.ok) {
             console.log("la suppression n'a pas marchée");
           }
-          return Response.json();
         })
         .then((data) => {
           console.log("la suppression a marchée voici votre data:", data);
           displayGallerieModale();
-          init();
+          affichageTravaux();
         });
     });
   });
   //return false;
 }
-
 
 //le code sur la partie ajout de photo////////////////////////////
 const AjoutUnePhoto = document.querySelector(".modalGallerie button");
@@ -199,6 +194,13 @@ async function formSelectcategories() {
 }
 formSelectcategories();
 
+// fonction pour vidé le formulaire ajout image///
+function resetormWork() {
+  title.value = "";
+  selectGategorie.value = 0;
+  profilePic.src = "./assets/images/picture-svgrepo-com 1.png";
+}
+
 //ajoutre l'image dans le works, prémière methode ///
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -219,7 +221,8 @@ form.addEventListener("submit", (e) => {
     }).catch((error) => console.log(error));
 
     displayGallerieModale();
-    init();
+    affichageTravaux();
+    resetormWork();
   };
   addWorks();
 });
