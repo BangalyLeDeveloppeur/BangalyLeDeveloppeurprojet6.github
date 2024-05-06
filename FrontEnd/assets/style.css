@@ -447,11 +447,15 @@ li:hover {
 
 }
 /*style pour le boutton */
+.btn-tous{
+  background-color: #1d6154;
+  color: white;
+}
 button {
   cursor: pointer;
   margin-left: 30px;
-  background-color: #1d6154;
-  color: white;
+  background-color: rgb(238, 234, 212);
+  color: #1d6154;
   font-size: 1rem;
   font-family: "Syne";
   font-weight: bold;

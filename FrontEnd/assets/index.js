@@ -10,10 +10,12 @@ async function init() {
   categoriesButtons();
   filtreCategory();
   displayGallerieModale();
+  console.log(listeWorks)
 }
 async function getworks() {
   const Response = await fetch(`http://localhost:5678/api/works/`);
   return await Response.json();
+  
 }
 
 init();
@@ -21,6 +23,7 @@ init();
 //afficharge des travaux ///
 async function affichageTravaux(works) {
   let listeWork = works ? works : await getworks();
+  //console.log(works)
   const arrayWorks = await getworks();
   // console.log(arrayWorks)
   gallerySection.innerHTML = "";
@@ -73,6 +76,7 @@ async function filtreCategory() {
     });
   });
 }
+
 
 //le code sur la partie modale  sur modifier//////////////////////////////////////////////////
 //// ciblage des balise sur Dom ///
@@ -144,6 +148,10 @@ function imageSuprimer() {
   });
   //return false;
 }
+
+
+
+
 
 //le code sur la partie ajout de photo////////////////////////////
 const AjoutUnePhoto = document.querySelector(".modalGallerie button");

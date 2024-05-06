@@ -23,6 +23,7 @@ async function userPost(user) {
   if (response.ok) {
     return response.json();
   }
+
 }
 
 //function de conexion ///
@@ -33,7 +34,7 @@ async function login() {
     const userPassword = password.value;
    
     const users = await userPost({ email: userEmail, password: userPassword });
-    console.log(users);
+    //console.log(users);
     if (users) {
       window.localStorage.setItem("authToken", users.token);
       window.sessionStorage.loged = true;
