@@ -196,12 +196,17 @@ async function formSelectcategories() {
 }
 formSelectcategories();
 
-// sit l'utilisateur est connecteé
+// sit l'utilisateur est connecté sur la page de connexion //
 const loged = window.sessionStorage.loged;
 const logout = document.querySelector("header ul .logout");
+const  projetSpan= document.querySelector(".portfolio-projet-modifier span");
+const  projetModifier= document.querySelector(".portfolio-projet-modifier p");
+console.log(projetModifier);
 console.log(loged);
 if (loged == "true") {
   logout.textContent = "logout";
+  projetModifier.style.display = "inline"
+  projetSpan.style.display = "inline"
   logout.addEventListener("click", () => {
     window.sessionStorage.loged = false;
   });

@@ -217,6 +217,10 @@ li:hover {
 display: none;
 
 }
+nav a {
+  text-decoration: none;
+
+}
 .portfolio-projet-modifier {
   display: flex;
   gap: 10px;
