@@ -342,6 +342,8 @@ nav a {
 }
 .modalGallerie button {
   margin-top: 85px;
+  background-color: #1d6154;
+  color: white;
 }
 .modalGallerie i {
   margin-left: 90%;
