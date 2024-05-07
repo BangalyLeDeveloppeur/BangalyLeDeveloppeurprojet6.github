@@ -3,6 +3,9 @@ const email = document.querySelector(" form #email");
 const password = document.querySelector("form #password");
 const form = document.querySelector("form");
 const messageErreur = document.querySelector(".logg p");
+const modif = document.querySelector("form button");
+console.log(modif);
+
 //console.log(messageErreur);
 
 // la methode post dans Api//
@@ -23,7 +26,6 @@ async function userPost(user) {
   if (response.ok) {
     return response.json();
   }
-
 }
 
 //function de conexion ///
@@ -32,7 +34,7 @@ async function login() {
     e.preventDefault();
     const userEmail = email.value;
     const userPassword = password.value;
-   
+
     const users = await userPost({ email: userEmail, password: userPassword });
     //console.log(users);
     if (users) {
@@ -50,3 +52,4 @@ async function login() {
 }
 
 login();
+

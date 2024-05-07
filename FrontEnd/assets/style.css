@@ -213,6 +213,10 @@ li:hover {
   gap: 20px;
 }
 /* code pour modifier */
+.portfolio-projet-titr{
+display: none;
+
+}
 .portfolio-projet-modifier {
   display: flex;
   gap: 10px;

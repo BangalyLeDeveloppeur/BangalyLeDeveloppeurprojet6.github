@@ -10,12 +10,11 @@ async function init() {
   categoriesButtons();
   filtreCategory();
   displayGallerieModale();
-  console.log(listeWorks)
+  console.log(listeWorks);
 }
 async function getworks() {
   const Response = await fetch(`http://localhost:5678/api/works/`);
   return await Response.json();
-  
 }
 
 init();
@@ -76,7 +75,6 @@ async function filtreCategory() {
     });
   });
 }
-
 
 //le code sur la partie modale  sur modifier//////////////////////////////////////////////////
 //// ciblage des balise sur Dom ///
@@ -149,10 +147,6 @@ function imageSuprimer() {
   //return false;
 }
 
-
-
-
-
 //le code sur la partie ajout de photo////////////////////////////
 const AjoutUnePhoto = document.querySelector(".modalGallerie button");
 const AjoutPhoto = document.querySelector(".ajouterphoto");
@@ -201,6 +195,17 @@ async function formSelectcategories() {
   });
 }
 formSelectcategories();
+
+// sit l'utilisateur est connecteé
+const loged = window.sessionStorage.loged;
+const logout = document.querySelector("header ul .logout");
+console.log(loged);
+if (loged == "true") {
+  logout.textContent = "logout";
+  logout.addEventListener("click", () => {
+    window.sessionStorage.loged = false;
+  });
+}
 
 // fonction pour vidé le formulaire ajout image///
 function resetormWork() {
