@@ -473,12 +473,24 @@ button {
   border-radius: 20px;
   border: none;
   &:hover {
-    color: #1d6154;
-    background-color: antiquewhite;
+    color: white;
+    background-color: #1d6154;
     border: 1px solid #1d6154;
   }
 }
+form span {
+  color: rgb(238, 232, 232);
+  font-size: 2em;
+}
 
+.notif-bar {
+  position: absolute;
+  width: 82%;
+  top: 395px;
+  left: 58px;
+  height: 30px;
+  background-color: red;
+}
 .gallery {
   width: 100%;
   display: grid;

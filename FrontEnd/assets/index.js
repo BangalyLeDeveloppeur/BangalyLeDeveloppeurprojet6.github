@@ -199,14 +199,14 @@ formSelectcategories();
 // sit l'utilisateur est connecté sur la page de connexion //
 const loged = window.sessionStorage.loged;
 const logout = document.querySelector("header ul .logout");
-const  projetSpan= document.querySelector(".portfolio-projet-modifier span");
-const  projetModifier= document.querySelector(".portfolio-projet-modifier p");
+const projetSpan = document.querySelector(".portfolio-projet-modifier span");
+const projetModifier = document.querySelector(".portfolio-projet-modifier p");
 console.log(projetModifier);
 console.log(loged);
 if (loged == "true") {
   logout.textContent = "logout";
-  projetModifier.style.display = "inline"
-  projetSpan.style.display = "inline"
+  projetModifier.style.display = "inline";
+  projetSpan.style.display = "inline";
   logout.addEventListener("click", () => {
     window.sessionStorage.loged = false;
   });
@@ -222,6 +222,7 @@ function resetormWork() {
 //ajoutre l'image dans le works, prémière methode ///
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  let inputFile = document.getElementById("input-file");
   const addWorks = () => {
     const token = localStorage.getItem("authToken");
     const formData = new FormData();
@@ -229,20 +230,43 @@ form.addEventListener("submit", (e) => {
     formData.append("title", title.value);
     formData.append("category", selectGategorie.value);
 
-    console.log(formData);
     fetch("http://localhost:5678/api/works/", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
       },
       body: formData,
-    }).catch((error) => console.log(error));
-
-    displayGallerieModale();
-    affichageTravaux();
-    resetormWork();
+    })
+      .then((resp) => {
+        if (resp.ok) {
+          displayGallerieModale();
+          affichageTravaux();
+          resetormWork();
+        } else {
+          const errorForm = document.querySelector("Form span");
+          errorForm.classList.remove("notif-bar");
+        }
+      })
+      .catch((error) => console.log(error));
   };
-  addWorks();
+  if (validateForm()) {
+    addWorks();
+  }
 });
 
 //////////////////
+// fonction qui verifie si touts les champs sont remplies/
+const validateForm = () => {
+  const errorForm = document.querySelector("Form span");
+  if (!title.value || title.value.trim() === "") {
+    errorForm.textContent = "Veuillez remplir le champs de titre";
+    errorForm.classList.add("notif-bar");
+    return false;
+  }
+  if (!selectGategorie.value || selectGategorie.value <= 0) {
+    errorForm.textContent = "Veuillez remplir le champs de titre";
+    errorForm.classList.add("notif-bar");
+    return false;
+  }
+  return true;
+};
