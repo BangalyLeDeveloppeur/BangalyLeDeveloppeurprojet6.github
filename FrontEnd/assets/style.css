@@ -447,7 +447,7 @@ i.fa-regular.fa-pen-to-square {
 
 .ajouterphoto form button{
   cursor: pointer;
-  margin-left: 85px;
+  margin-left: 25%;
   width: 50%;
   background-color: #606463;
   color: white;

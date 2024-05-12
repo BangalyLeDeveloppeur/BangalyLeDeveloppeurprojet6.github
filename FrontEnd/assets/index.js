@@ -159,7 +159,7 @@ const button = document.querySelector("form button");
 const selectGategorie = document.querySelector("form .select");
 const title = document.querySelector("form .title-image");
 const form = document.querySelector("form");
-//const ajoutImageFormulaire = document.querySelector("Form .ajoutphoto");
+const ajoutImageFormulaire = document.querySelector("Form .ajoutphoto");
 
 console.log(ajoutImageFormulaire);
 
@@ -172,9 +172,9 @@ console.log(ajoutImageFormulaire);
 arrowLeft.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
 });
-//ajoutImageFormulaire.addEventListener("click", (e) => {
-//ajoutImageFormulaire.style.display = "none";
-//});
+ajoutImageFormulaire.addEventListener("click", (e) => {
+ajoutImageFormulaire.style.display = "none";
+});
 button.addEventListener("click", (e) => {
   button.style.background = "#1d6154";
 });
