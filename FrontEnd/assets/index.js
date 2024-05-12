@@ -159,8 +159,9 @@ const button = document.querySelector("form button");
 const selectGategorie = document.querySelector("form .select");
 const title = document.querySelector("form .title-image");
 const form = document.querySelector("form");
+//const ajoutImageFormulaire = document.querySelector("Form .ajoutphoto");
 
-console.log(selectGategorie);
+console.log(ajoutImageFormulaire);
 
 //console.log(title)
 
@@ -171,6 +172,9 @@ console.log(selectGategorie);
 arrowLeft.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
 });
+//ajoutImageFormulaire.addEventListener("click", (e) => {
+//ajoutImageFormulaire.style.display = "none";
+//});
 button.addEventListener("click", (e) => {
   button.style.background = "#1d6154";
 });
@@ -180,7 +184,6 @@ AjoutUnePhoto.addEventListener("click", (e) => {
 xmarkk.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
 });
-
 inputFile.onchange = function () {
   profilePic.src = URL.createObjectURL(inputFile.files[0]);
 };
@@ -211,15 +214,19 @@ if (loged == "true") {
     window.sessionStorage.loged = false;
   });
 }
-
 // fonction pour vidé le formulaire ajout image///
 function resetormWork() {
+  form.addEventListener("input", (e) => {
+    const errorForm = document.querySelector("Form span");
+    errorForm.classList = "";
+    errorForm.style.display = "none";
+  });
   title.value = "";
   selectGategorie.value = 0;
   profilePic.src = "./assets/images/picture-svgrepo-com 1.png";
 }
 
-//ajoutre l'image dans le works, prémière methode ///
+//ajoutre l'image dans le works, prémière methode /////
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   let inputFile = document.getElementById("input-file");
@@ -242,9 +249,6 @@ form.addEventListener("submit", (e) => {
           displayGallerieModale();
           affichageTravaux();
           resetormWork();
-        } else {
-          const errorForm = document.querySelector("Form span");
-          errorForm.classList.remove("notif-bar");
         }
       })
       .catch((error) => console.log(error));
@@ -256,16 +260,18 @@ form.addEventListener("submit", (e) => {
 
 //////////////////
 // fonction qui verifie si touts les champs sont remplies/
+
 const validateForm = () => {
   const errorForm = document.querySelector("Form span");
   if (!title.value || title.value.trim() === "") {
-    errorForm.textContent = "Veuillez remplir le champs de titre";
+    errorForm.textContent = "Veuillez bien remplir tous les champs de titre";
+    errorForm.style.display = "inline";
     errorForm.classList.add("notif-bar");
     return false;
   }
+
   if (!selectGategorie.value || selectGategorie.value <= 0) {
     errorForm.textContent = "Veuillez remplir le champs de titre";
-    errorForm.classList.add("notif-bar");
     return false;
   }
   return true;
