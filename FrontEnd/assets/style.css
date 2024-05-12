@@ -482,6 +482,9 @@ button {
     border: 1px solid #1d6154;
   }
 }
+label.ajoutphoto{
+  color: #0000ff80;
+}
 form span {
   color: rgb(238, 232, 232);
   font-size: 1.6em;
