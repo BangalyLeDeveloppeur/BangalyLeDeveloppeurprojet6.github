@@ -23,8 +23,6 @@ init();
 async function affichageTravaux(works) {
   let listeWork = works ? works : await getworks();
   //console.log(works)
-  const arrayWorks = await getworks();
-  // console.log(arrayWorks)
   gallerySection.innerHTML = "";
   //la boucle forEch a chaque passage dans la base de donées
   listeWork.forEach((works) => {
@@ -82,6 +80,7 @@ const modifier = document.querySelector(".portfolio-projet-modifier p");
 const containerModal = document.querySelector(".containerModal");
 const xmark = document.querySelector(".containerModal .fa-xmark");
 const galleriesModal = document.querySelector(".galleriesModal");
+
 
 modifier.addEventListener("click", (e) => {
   containerModal.style.display = "inline";
@@ -160,23 +159,19 @@ const selectGategorie = document.querySelector("form .select");
 const title = document.querySelector("form .title-image");
 const form = document.querySelector("form");
 const ajoutImageFormulaire = document.querySelector("Form .ajoutphoto");
+//console.log(ajoutImageFormulaire);
 
-console.log(ajoutImageFormulaire);
-
-//console.log(title)
-
-//console.log(selectGategorie);
-
-//console.log(arrowLeft);
-//console.log(AjoutUnePhoto);
 arrowLeft.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
+  
 });
 ajoutImageFormulaire.addEventListener("click", (e) => {
 ajoutImageFormulaire.style.display = "none";
+button.style.background = "#1d6154";
 });
 button.addEventListener("click", (e) => {
   button.style.background = "#1d6154";
+  
 });
 AjoutUnePhoto.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "inline";
@@ -260,7 +255,6 @@ form.addEventListener("submit", (e) => {
 
 //////////////////
 // fonction qui verifie si touts les champs sont remplies/
-
 const validateForm = () => {
   const errorForm = document.querySelector("Form span");
   if (!title.value || title.value.trim() === "") {
@@ -269,9 +263,10 @@ const validateForm = () => {
     errorForm.classList.add("notif-bar");
     return false;
   }
-
-  if (!selectGategorie.value || selectGategorie.value <= 0) {
-    errorForm.textContent = "Veuillez remplir le champs de titre";
+  if (!title.value || selectGategorie.value <= 0) {
+    errorForm.textContent = "Veuillez bien remplir tous les champs de titre";
+    errorForm.style.display = "inline";
+    errorForm.classList.add("notif-bar");
     return false;
   }
   return true;

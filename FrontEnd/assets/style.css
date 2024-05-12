@@ -336,17 +336,21 @@ i.fa-regular.fa-pen-to-square {
   margin-bottom: 28px;
  
 }
+.modalGallerie {
+  height: 100%;
+}
 .modalGallerie::before {
   content: " ";
   position: absolute;
   width: 90%;
-  top: 540px;
+  height: 90%;
   border-bottom: 1px rgba(136, 128, 128, 0.671) solid;
 }
 .modalGallerie button {
-  margin-top: 85px;
   background-color: #1d6154;
   color: white;
+  margin-top: 150px;
+
 }
 .modalGallerie i {
   margin-left: 90%;
@@ -480,7 +484,7 @@ button {
 }
 form span {
   color: rgb(238, 232, 232);
-  font-size: 2em;
+  font-size: 1.6em;
 
 }
 
