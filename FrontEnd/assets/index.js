@@ -80,8 +80,6 @@ const modifier = document.querySelector(".portfolio-projet-modifier p");
 const containerModal = document.querySelector(".containerModal");
 const xmark = document.querySelector(".containerModal .fa-xmark");
 const galleriesModal = document.querySelector(".galleriesModal");
-
-
 modifier.addEventListener("click", (e) => {
   containerModal.style.display = "inline";
 });
@@ -119,7 +117,6 @@ async function displayGallerieModale() {
 //supprission de l'image sur le site/////////////
 function imageSuprimer() {
   const supprimImage = document.querySelectorAll(".fa-trash-can");
-
   supprimImage.forEach((trash) => {
     const token = localStorage.getItem("authToken");
     trash.addEventListener("click", (e) => {
@@ -172,6 +169,7 @@ button.style.background = "#1d6154";
 button.addEventListener("click", (e) => {
   button.style.background = "#1d6154";
   
+  
 });
 AjoutUnePhoto.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "inline";
@@ -199,7 +197,7 @@ const loged = window.sessionStorage.loged;
 const logout = document.querySelector("header ul .logout");
 const projetSpan = document.querySelector(".portfolio-projet-modifier span");
 const projetModifier = document.querySelector(".portfolio-projet-modifier p");
-console.log(projetModifier);
+//console.log(projetModifier);
 console.log(loged);
 if (loged == "true") {
   logout.textContent = "logout";
@@ -220,7 +218,6 @@ function resetormWork() {
   selectGategorie.value = 0;
   profilePic.src = "./assets/images/picture-svgrepo-com 1.png";
 }
-
 //ajoutre l'image dans le works, prémière methode /////
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -240,6 +237,7 @@ form.addEventListener("submit", (e) => {
       body: formData,
     })
       .then((resp) => {
+        
         if (resp.ok) {
           displayGallerieModale();
           affichageTravaux();
@@ -247,6 +245,7 @@ form.addEventListener("submit", (e) => {
         }
       })
       .catch((error) => console.log(error));
+      
   };
   if (validateForm()) {
     addWorks();
