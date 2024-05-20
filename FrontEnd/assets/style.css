@@ -293,13 +293,15 @@ i.fa-regular.fa-pen-to-square {
     padding: 10px 20px;
     border-radius: 20px;
     border: none;
-    &:hover {
+    &:hover{
       color: #1d6154;
       background-color: antiquewhite;
       border: 1px solid #1d6154;
     }
   }
+  
 }
+
 .logg p {
   font-family: "Syne";
   text-align: center;
@@ -335,6 +337,7 @@ i.fa-regular.fa-pen-to-square {
   align-items: center;
   border-radius: 20px;
   margin-bottom: 4em;
+
 }
 /* style pour le modal */
 .containerModal {
@@ -502,6 +505,10 @@ button {
     background-color: #1d6154;
     border: 1px solid #1d6154;
   }
+}
+.filter button:focus{
+  color: white;
+  background-color: #1d6154;
 }
 label.ajoutphoto{
   color: #0000ff80;

@@ -203,7 +203,7 @@ if (loged == "true") {
   projetModifier.style.display = "inline";
   projetSpan.style.display = "inline";
   bandEditer.style.display = "inline";
-  filter.style.display = "none"
+  filter.style.display = "none";
   logout.addEventListener("click", () => {
     window.sessionStorage.loged = false;
   });
