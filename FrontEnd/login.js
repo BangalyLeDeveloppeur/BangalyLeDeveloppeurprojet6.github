@@ -36,7 +36,7 @@ async function login() {
     const userPassword = password.value;
 
     const users = await userPost({ email: userEmail, password: userPassword });
-    //console.log(users);
+    
     if (users) {
       window.localStorage.setItem("authToken", users.token);
       window.sessionStorage.loged = true;
@@ -52,4 +52,3 @@ async function login() {
 }
 
 login();
-

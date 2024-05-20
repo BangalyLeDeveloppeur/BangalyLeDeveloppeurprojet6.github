@@ -22,7 +22,6 @@ init();
 //afficharge des travaux ///
 async function affichageTravaux(works) {
   let listeWork = works ? works : await getworks();
-  //console.log(works)
   gallerySection.innerHTML = "";
   //la boucle forEch a chaque passage dans la base de donées
   listeWork.forEach((works) => {
@@ -42,7 +41,7 @@ async function getcategorie() {
   const Reponse = await fetch("http://localhost:5678/api/categories/");
   return await Reponse.json();
 }
-
+// creation des boutons categorie //
 async function categoriesButtons() {
   const categorys = await getcategorie();
   // console.log(categorys);
@@ -92,7 +91,7 @@ containerModal.addEventListener("click", (e) => {
   }
 });
 
-//afficharge image de la galerie modalev/////
+//afficharge image dans la galerie modale/////
 async function displayGallerieModale() {
   galleriesModal.innerHTML = "";
   const galerieTableaux = await getworks();
@@ -114,7 +113,7 @@ async function displayGallerieModale() {
   //console.log(galerieTableaux);
 }
 
-//supprission de l'image sur le site/////////////
+//supprission l'image sur le site/////////////
 function imageSuprimer() {
   const supprimImage = document.querySelectorAll(".fa-trash-can");
   supprimImage.forEach((trash) => {
@@ -160,17 +159,15 @@ const ajoutImageFormulaire = document.querySelector("Form .ajoutphoto");
 
 arrowLeft.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "none";
-  
 });
 ajoutImageFormulaire.addEventListener("click", (e) => {
-ajoutImageFormulaire.style.display = "none";
-button.style.background = "#1d6154";
+  ajoutImageFormulaire.style.display = "none";
+  button.style.background = "#1d6154";
 });
 button.addEventListener("click", (e) => {
   button.style.background = "#1d6154";
-  
-  
 });
+
 AjoutUnePhoto.addEventListener("click", (e) => {
   AjoutPhoto.style.display = "inline";
 });
@@ -197,12 +194,15 @@ const loged = window.sessionStorage.loged;
 const logout = document.querySelector("header ul .logout");
 const projetSpan = document.querySelector(".portfolio-projet-modifier span");
 const projetModifier = document.querySelector(".portfolio-projet-modifier p");
+const bandEditer = document.querySelector(".bande-edition");
+console.log(bandEditer);
 //console.log(projetModifier);
 console.log(loged);
 if (loged == "true") {
   logout.textContent = "logout";
   projetModifier.style.display = "inline";
   projetSpan.style.display = "inline";
+  bandEditer.style.display = "inline";
   logout.addEventListener("click", () => {
     window.sessionStorage.loged = false;
   });
@@ -237,7 +237,6 @@ form.addEventListener("submit", (e) => {
       body: formData,
     })
       .then((resp) => {
-        
         if (resp.ok) {
           displayGallerieModale();
           affichageTravaux();
@@ -245,7 +244,6 @@ form.addEventListener("submit", (e) => {
         }
       })
       .catch((error) => console.log(error));
-      
   };
   if (validateForm()) {
     addWorks();
@@ -257,13 +255,13 @@ form.addEventListener("submit", (e) => {
 const validateForm = () => {
   const errorForm = document.querySelector("Form span");
   if (!title.value || title.value.trim() === "") {
-    errorForm.textContent = "Veuillez bien remplir tous les champs de titre";
+    errorForm.textContent = "Veuillez bien remplir tous les champs";
     errorForm.style.display = "inline";
     errorForm.classList.add("notif-bar");
     return false;
   }
-  if (!title.value || selectGategorie.value <= 0) {
-    errorForm.textContent = "Veuillez bien remplir tous les champs de titre";
+  if (!selectGategorie.value || selectGategorie.value <= 0) {
+    errorForm.textContent = "Veuillez bien remplir tous les champs";
     errorForm.style.display = "inline";
     errorForm.classList.add("notif-bar");
     return false;

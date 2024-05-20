@@ -306,8 +306,29 @@ i.fa-regular.fa-pen-to-square {
   font-size: 1.5rem;
   color: red;
   margin-top: 0.7em;
+  margin-left: 150px;
+}
+.bande-noir {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+  height: 50px;
+  background-color: black;
+ 
+
+}
+.bande-noir p{
+  color: white;
 }
 
+.edite{
+  color: white;
+}
+.bande-edition{
+  display: none;
+}
 .filter {
   display: flex;
   justify-content: center;
