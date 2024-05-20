@@ -267,5 +267,11 @@ const validateForm = () => {
     errorForm.classList.add("notif-bar");
     return false;
   }
+  if (!inputFile.value || inputFile.value === ""){
+    errorForm.textContent = "Veuillez bien remplir tous les champs";
+    errorForm.style.display = "inline";
+    errorForm.classList.add("notif-bar");
+    return false;
+  }
   return true;
 };
